@@ -1,0 +1,58 @@
+.rnd {
+  position: relative;
+}
+
+.rnd__root-menu {
+  position: absolute;
+  right: 0;
+  margin: 7px 0;
+  z-index: 10;
+}
+
+.rnd__menu {
+  background-color: #fff;
+  border: 1px solid hsl(0, 0%, 90%);
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.rnd__submenu {
+  position: absolute;
+  right: 100%;
+  display: none;
+  top: 0;
+  width: 160px;
+}
+
+.rnd__option {
+  padding: 12px 15px;
+  cursor: pointer;
+  word-break: break-word;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.rnd__option--with-menu:hover .rnd__submenu {
+  display: block;
+}
+
+.rnd__option:not(.rnd__option--disabled):hover {
+  background-color: hsl(0, 0%, 90%);
+}
+
+.rnd__option--disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.rnd__option-icon {
+  margin-right: 0.49rem;
+}
+
+.rnd__option-label {
+  font-weight: 600;
+  font-size: 11px;
+}
