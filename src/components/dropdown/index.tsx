@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useClickAway } from '~/utils/useClickAway';
+import { useClickAway } from '~/utils/use-click-away';
 
 export interface DropdownItem<TValue = undefined> {
   label: string;

@@ -1,13 +1,23 @@
 {
   "name": "react-nested-dropdown",
   "version": "0.0.1",
-  "description": "",
-  "scripts": {
-    "build": "rm -rf dist && rollup -c",
-    "build-watch": "rollup -c -w"
+  "description": "Dropdown with submenu for React",
+  "author": "German Makarov <cxdcjs@gmail.com>",
+  "homepage": "https://github.com/g-makarov/react-nested-dropdown",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g-makarov/react-nested-dropdown"
   },
-  "author": "",
+  "bugs": {
+    "url": "https://github.com/g-makarov/react-nested-dropdown/issues"
+  },
   "license": "MIT",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "rm -rf dist && rollup -c",
+    "build:watch": "rollup -c -w",
+    "prettier": "prettier --write src/**/*"
+  },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "unpkg": "dist/react-nested-dropdown.min.js",
@@ -15,6 +25,9 @@
   "style": "dist/style.css",
   "dependencies": {
     "clsx": "^1.2.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "files": [
     "dist",
