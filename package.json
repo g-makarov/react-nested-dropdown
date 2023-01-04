@@ -13,10 +13,11 @@
   },
   "license": "MIT",
   "scripts": {
-    "prepublish": "npm run build",
     "build": "rm -rf dist && rollup -c",
     "build:watch": "rollup -c -w",
-    "prettier": "prettier --write src/**/*"
+    "prettier": "prettier --write src/**/*",
+    "prepublish": "npm run build",
+    "postversion": "git push && git push --tags"
   },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
