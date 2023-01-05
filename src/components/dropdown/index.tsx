@@ -16,6 +16,7 @@ export interface DropdownItem<TValue = undefined> {
   iconBefore?: ReactNode;
   iconAfter?: ReactNode;
   items?: DropdownItem<TValue>[];
+  itemsContainerWidth?: number | string;
   value?: TValue;
   onSelect?: () => void;
   disabled?: boolean;
@@ -34,7 +35,7 @@ export interface DropdownProps<TValue> {
 
 export const Dropdown = <TValue,>({
   items,
-  containerWidth,
+  containerWidth = 300,
   onSelect,
   children,
   className,
@@ -95,10 +96,15 @@ export const Dropdown = <TValue,>({
   const rootMenuRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
+    // todo: refactor
     if (dropdownIsOpen && rootMenuRef.current) {
       const rect = rootMenuRef.current.getBoundingClientRect();
       if (rect.bottom > window.innerHeight) {
         rootMenuRef.current.style.bottom = '100%';
+      } else if (rect.left < 0) {
+        rootMenuRef.current.style.left = '0';
+      } else if (rect.right > window.innerWidth) {
+        rootMenuRef.current.style.right = '0';
       }
     }
   }, [dropdownIsOpen]);
@@ -134,6 +140,7 @@ const Option = <TValue,>({
 }: OptionProps<TValue>): React.ReactElement => {
   const items = option.items;
   const hasSubmenu = !!items;
+  const itemsContainerWidth = option.itemsContainerWidth ?? 150;
 
   const handleClick = React.useCallback(
     (e: UIEvent) => {
@@ -154,10 +161,14 @@ const Option = <TValue,>({
       entries.forEach(entry => {
         const isHTMLElement = entry.target instanceof HTMLElement;
         if (isHTMLElement) {
+          // todo: refactor
           const rect = entry.target.getBoundingClientRect();
           if (rect.bottom > window.innerHeight) {
             entry.target.style.top = 'auto';
             entry.target.style.bottom = '0';
+          } else if (rect.left < 0) {
+            entry.target.style.right = 'auto';
+            entry.target.style.left = '100%';
           }
         }
       });
@@ -174,6 +185,8 @@ const Option = <TValue,>({
     };
   }, []);
 
+  const iconAfter = hasSubmenu ? chevronNode : option.iconAfter;
+
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <li
@@ -185,7 +198,11 @@ const Option = <TValue,>({
       onKeyUp={handleClick}
     >
       {hasSubmenu && (
-        <ul className="rnd__menu rnd__submenu" ref={submenuRef}>
+        <ul
+          className="rnd__menu rnd__submenu"
+          ref={submenuRef}
+          style={{ width: itemsContainerWidth }}
+        >
           {items.map((item, index) => (
             <Option key={index} option={item} onSelect={onSelect} renderOption={renderOption} />
           ))}
@@ -194,16 +211,26 @@ const Option = <TValue,>({
       {renderOption && renderOption(option)}
       {!renderOption && (
         <>
-          {option.iconBefore && <div>{option.iconBefore}</div>}
-          <p className="rnd__option-label">{option.label}</p>
-          {hasSubmenu && (
-            <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
-              <path d="M28 34 18 24l10-10Z" />
-            </svg>
+          {option.iconBefore && (
+            <div className="rnd__option-icon rnd__option-icon--left">{option.iconBefore}</div>
           )}
-          {option.iconAfter && <div className="ml-auto">{option.iconAfter}</div>}
+          <p className="rnd__option-label">{option.label}</p>
+          {iconAfter && <div className="rnd__option-icon rnd__option-icon--right">{iconAfter}</div>}
         </>
       )}
     </li>
   );
 };
+
+const chevronNode = (
+  <div
+    style={{
+      border: '5px solid currentColor',
+      borderRightColor: 'transparent',
+      borderBottomColor: 'transparent',
+      borderTopColor: 'transparent',
+      width: 0,
+      height: 0,
+    }}
+  />
+);

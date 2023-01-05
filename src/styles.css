@@ -1,5 +1,10 @@
 .rnd {
   position: relative;
+  width: max-content;
+}
+
+.rnd * {
+  box-sizing: border-box;
 }
 
 .rnd__root-menu {
@@ -14,7 +19,8 @@
   border: 1px solid hsl(0, 0%, 90%);
   box-shadow: 0 4px 17px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
-  padding: 4px;
+  padding: 4px 0;
+  list-style: none;
 }
 
 .rnd__submenu {
@@ -22,7 +28,6 @@
   right: 100%;
   display: none;
   top: 0;
-  width: 160px;
 }
 
 .rnd__option {
@@ -48,11 +53,16 @@
   opacity: 0.4;
 }
 
-.rnd__option-icon {
-  margin-right: 0.49rem;
+.rnd__option-icon--left {
+  margin-right: 7px;
+}
+
+.rnd__option-icon--right {
+  margin-left: auto;
 }
 
 .rnd__option-label {
   font-weight: 600;
   font-size: 11px;
+  margin: 0;
 }

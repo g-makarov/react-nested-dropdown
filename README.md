@@ -13,11 +13,16 @@
   <img alt="npm gzip minified bundle size" src="https://img.shields.io/bundlephobia/minzip/react-nested-dropdown?style=flat-square">
 </a>
 
+A simple and customizable nested dropdown component for React.
+
+<img src="./screenshots/1.png" width="966">
+
 ## Features
 
 - Custom trigger element
 - Dropdown item with submenu
 - Specific props to each dropdown item
+- Auto positioning of dropdown menu
 - Written in TypeScript 🤙
 
 ## Installation
@@ -37,7 +42,7 @@ yarn add react-nested-dropdown
 import React from 'react';
 
 import { Dropdown } from 'react-nested-dropdown';
-import 'react-nested-dropdown/dist/style.css';
+import 'react-nested-dropdown/dist/styles.css';
 
 const items = [
   {
@@ -77,7 +82,7 @@ export const App = () => {
 | Prop             | Type                                                                       | Default | Description                                                                                                                                                                                                                                                      |
 | ---------------- | -------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `items`          | `DropdownItem[]`                                                           | `[]`    | An array of dropdown items to render in the menu.                                                                                                                                                                                                                |
-| `containerWidth` | `number` or `string`                                                       | `null`  | The width of the dropdown menu container. Can be a number for pixels or a string for any valid CSS width value.                                                                                                                                                  |
+| `containerWidth` | `number` or `string`                                                       | `300`   | The width of the dropdown menu container. Can be a number for pixels or a string for any valid CSS width value.                                                                                                                                                  |
 | `onSelect`       | `(value: any, option: DropdownItem) => void`                               | `null`  | A callback function that is called when an option is selected. It is passed the value of the selected option and the option object itself.                                                                                                                       |
 | `children`       | `(params: { onClick: () => void, isOpen: boolean }) => React.ReactElement` | `null`  | A function that returns a React element to be used as the trigger for the dropdown menu. The function is passed an object with an `onClick` function to open and close the dropdown, and an `isOpen` boolean to indicate the current open state of the dropdown. |
 | `className`      | `string`                                                                   | `null`  | A custom class name to be applied to the root element of the component.                                                                                                                                                                                          |
@@ -86,13 +91,14 @@ export const App = () => {
 
 ## `DropdownItem` interface
 
-| Prop         | Type              | Default     | Description                                                                                               |
-| ------------ | ----------------- | ----------- | --------------------------------------------------------------------------------------------------------- |
-| `label`      | `string`          | `''`        | The label to display for the item.                                                                        |
-| `iconBefore` | `React.ReactNode` | `null`      | An optional icon to display before the label.                                                             |
-| `iconAfter`  | `React.ReactNode` | `null`      | An optional icon to display after the label.                                                              |
-| `items`      | `DropdownItem[]`  | `null`      | An optional array of nested items to create a submenu.                                                    |
-| `value`      | `any`             | `undefined` | An optional value for the item. This value will be in `Dropdown`'s callback `onSelect` as first argument. |
-| `onSelect`   | `() => void`      | `null`      | An optional callback function to be called when the item is selected.                                     |
-| `disabled`   | `boolean`         | `false`     | Whether the item should be disabled and unable to be selected.                                            |
-| `className`  | `string`          | `null`      | An optional class name to be applied to the item element.                                                 |
+| Prop                  | Type                 | Default     | Description                                                                                                      |
+| --------------------- | -------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------- |
+| `label`               | `string`             | `''`        | The label to display for the item.                                                                               |
+| `iconBefore`          | `React.ReactNode`    | `null`      | An optional icon to display before the label.                                                                    |
+| `iconAfter`           | `React.ReactNode`    | `null`      | An optional icon to display after the label.                                                                     |
+| `items`               | `DropdownItem[]`     | `null`      | An optional array of nested items to create a submenu.                                                           |
+| `itemsContainerWidth` | `number` or `string` | `150`       | The width of the sub items menu container. Can be a number for pixels or a string for any valid CSS width value. |
+| `value`               | `any`                | `undefined` | An optional value for the item. This value will be in `Dropdown`'s callback `onSelect` as first argument.        |
+| `onSelect`            | `() => void`         | `null`      | An optional callback function to be called when the item is selected.                                            |
+| `disabled`            | `boolean`            | `false`     | Whether the item should be disabled and unable to be selected.                                                   |
+| `className`           | `string`             | `null`      | An optional class name to be applied to the item element.                                                        |
