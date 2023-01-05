@@ -1,5 +1,7 @@
 # react-nested-dropdown
 
+A simple and customizable nested dropdown component for React.
+
 <a href="https://www.npmjs.com/package/react-nested-dropdown">
   <img alt="npm version" src="https://img.shields.io/npm/v/react-nested-dropdown.svg?style=flat-square" />
 </a>
@@ -13,9 +15,9 @@
   <img alt="npm gzip minified bundle size" src="https://img.shields.io/bundlephobia/minzip/react-nested-dropdown?style=flat-square">
 </a>
 
-A simple and customizable nested dropdown component for React.
-
-<img src="./screenshots/1.png" width="966">
+<br>
+<br>
+<img src="https://raw.githubusercontent.com/g-makarov/react-nested-dropdown/add-storybook/screenshots/1.png" width="966">
 
 ## Features
 
