@@ -1,13 +1,13 @@
 import { exec } from 'child_process';
-
+import glob from 'glob';
+import path from 'path';
+import { babel } from "@rollup/plugin-babel";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-ts';
 import { terser } from 'rollup-plugin-terser';
 import copy from 'rollup-plugin-copy';
-import glob from 'glob';
-import path from 'path';
 
 import pkg from './package.json';
 
@@ -64,10 +64,14 @@ const buildConfig = {
     }
   ],
   plugins: [
-    watcher(['./src/style.css']),
+    watcher(['./src/styles.css']),
     peerDepsExternal(),
     nodeResolve(),
     commonjs(),
+    babel({
+      exclude: "node_modules/**",
+      presets: ["@babel/preset-react"],
+    }),
     typescript({
       tsconfig: './tsconfig.json',
       sourceMap: true
