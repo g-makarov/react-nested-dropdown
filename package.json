@@ -26,6 +26,7 @@
   "unpkg": "dist/react-nested-dropdown.min.js",
   "types": "dist/index.d.ts",
   "style": "dist/styles.css",
+  "type": "module",
   "dependencies": {
     "clsx": "^1.2.1"
   },
