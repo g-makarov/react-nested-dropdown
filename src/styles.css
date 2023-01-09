@@ -53,6 +53,14 @@
   opacity: 0.4;
 }
 
+.rnd__option-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .rnd__option-icon--left {
   margin-right: 7px;
 }
