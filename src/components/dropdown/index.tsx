@@ -101,6 +101,7 @@ export const Dropdown = <TValue,>({
       const rect = rootMenuRef.current.getBoundingClientRect();
       if (rect.bottom > window.innerHeight) {
         rootMenuRef.current.style.bottom = '100%';
+        rootMenuRef.current.style.top = 'auto';
       } else if (rect.left < 0) {
         rootMenuRef.current.style.left = '0';
       } else if (rect.right > window.innerWidth) {

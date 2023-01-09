@@ -1,6 +1,6 @@
 .rnd {
   position: relative;
-  width: max-content;
+  display: flex;
 }
 
 .rnd * {
@@ -9,6 +9,7 @@
 
 .rnd__root-menu {
   position: absolute;
+  top: 100%;
   right: 0;
   margin: 7px 0;
   z-index: 10;
