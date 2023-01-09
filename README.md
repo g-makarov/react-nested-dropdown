@@ -17,7 +17,7 @@ A simple and customizable nested dropdown component for React.
 
 <br>
 <br>
-<img src="https://raw.githubusercontent.com/g-makarov/react-nested-dropdown/add-storybook/screenshots/1.png" width="966">
+<img src="https://raw.githubusercontent.com/g-makarov/react-nested-dropdown/main/screenshots/1.png" width="966">
 
 ## Features
 
