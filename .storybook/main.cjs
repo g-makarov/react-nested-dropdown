@@ -9,6 +9,9 @@ module.exports = {
   ],
   framework: '@storybook/react',
   webpackFinal: async config => {
+    config.module.rules.push({
+      resolve: { fullySpecified: false },
+    });
     config.resolve.alias = {
       ...config.resolve.alias,
       '~': path.resolve(__dirname, '../src'),
