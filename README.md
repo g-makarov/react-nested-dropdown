@@ -23,6 +23,7 @@ A simple and customizable nested dropdown component for React.
 
 - Custom trigger element
 - Dropdown item with submenu
+- Multi level submenu support
 - Specific props to each dropdown item
 - Auto positioning of dropdown menu
 - Written in TypeScript 🤙
