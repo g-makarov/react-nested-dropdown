@@ -25,7 +25,11 @@ export default {
 } as ComponentMeta<typeof Dropdown>;
 
 const Template: ComponentStory<typeof Dropdown> = args => {
-  return <Dropdown {...args} />;
+  return (
+    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <Dropdown {...args} />
+    </div>
+  );
 };
 
 export const Basic = Template.bind({});
@@ -60,6 +64,12 @@ WithSubmenu.args = {
         {
           label: 'Option 2.1',
           onSelect: () => action('option:onSelect')('Option 2.1 clicked'),
+          items: [
+            {
+              label: 'Option 2.1.1',
+              onSelect: () => action('option:onSelect')('Option 2.1.1 clicked'),
+            },
+          ],
         },
         {
           label: 'Option 2.2',
@@ -68,6 +78,12 @@ WithSubmenu.args = {
         {
           label: 'Option 2.3',
           onSelect: () => action('option:onSelect')('Option 2.3 clicked'),
+          items: [
+            {
+              label: 'Option 2.3.1',
+              onSelect: () => action('option:onSelect')('Option 2.3.1 clicked'),
+            },
+          ],
         },
       ],
     },

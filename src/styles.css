@@ -1,6 +1,6 @@
 .rnd {
   position: relative;
-  display: flex;
+  width: fit-content;
 }
 
 .rnd * {
@@ -10,7 +10,6 @@
 .rnd__root-menu {
   position: absolute;
   top: 100%;
-  right: 0;
   margin: 7px 0;
   z-index: 10;
 }
@@ -26,7 +25,7 @@
 
 .rnd__submenu {
   position: absolute;
-  right: 100%;
+  left: 100%;
   display: none;
   top: 0;
 }
@@ -41,7 +40,7 @@
   align-items: center;
 }
 
-.rnd__option--with-menu:hover .rnd__submenu {
+.rnd__option--with-menu:hover > .rnd__submenu {
   display: block;
 }
 

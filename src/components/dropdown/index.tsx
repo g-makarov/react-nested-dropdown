@@ -170,6 +170,9 @@ const Option = <TValue,>({
           } else if (rect.left < 0) {
             entry.target.style.right = 'auto';
             entry.target.style.left = '100%';
+          } else if (rect.right > window.innerWidth) {
+            entry.target.style.left = 'auto';
+            entry.target.style.right = '100%';
           }
         }
       });
