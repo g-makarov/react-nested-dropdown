@@ -26,7 +26,7 @@ export default {
 
 const Template: ComponentStory<typeof Dropdown> = args => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
       <Dropdown {...args} />
     </div>
   );

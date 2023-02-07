@@ -5,11 +5,14 @@ import React, {
   UIEvent,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
-import { useClickAway } from '~/utils/use-click-away';
+import { useClickAway } from '~/hooks/use-click-away';
+
+import { getMenuPositionClassName } from './utils';
 
 export interface DropdownItem<TValue = undefined> {
   label: string;
@@ -43,7 +46,7 @@ export const Dropdown = <TValue,>({
   closeOnScroll = true,
 }: DropdownProps<TValue>): React.ReactElement => {
   const containerRef = useRef<HTMLDivElement>(null);
-
+  const [menuPositionClassName, setMenuPositionClassName] = useState<string>('');
   const [dropdownIsOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = useCallback(() => setDropdownOpen(state => !state), []);
@@ -95,19 +98,15 @@ export const Dropdown = <TValue,>({
 
   const rootMenuRef = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    // todo: refactor
+  useLayoutEffect(() => {
     if (dropdownIsOpen && rootMenuRef.current) {
-      const rect = rootMenuRef.current.getBoundingClientRect();
-      if (rect.bottom > window.innerHeight) {
-        rootMenuRef.current.style.bottom = '100%';
-        rootMenuRef.current.style.top = 'auto';
-      } else if (rect.left < 0) {
-        rootMenuRef.current.style.left = '0';
-      } else if (rect.right > window.innerWidth) {
-        rootMenuRef.current.style.right = '0';
-      }
+      setMenuPositionClassName(getMenuPositionClassName(rootMenuRef.current));
     }
+    return () => {
+      if (dropdownIsOpen) {
+        setMenuPositionClassName('');
+      }
+    };
   }, [dropdownIsOpen]);
 
   return (
@@ -115,7 +114,7 @@ export const Dropdown = <TValue,>({
       {children(childrenProps)}
       {dropdownIsOpen && (
         <ul
-          className="rnd__root-menu rnd__menu"
+          className={`rnd__root-menu rnd__menu ${menuPositionClassName}`}
           style={{ width: containerWidth }}
           ref={rootMenuRef}
         >
@@ -142,6 +141,8 @@ const Option = <TValue,>({
   const items = option.items;
   const hasSubmenu = !!items;
   const itemsContainerWidth = option.itemsContainerWidth ?? 150;
+  const [menuPositionClassName, setMenuPositionClassName] = useState<string>('');
+  const [submenuIsOpen, setSubmenuOpen] = useState(false);
 
   const handleClick = React.useCallback(
     (e: UIEvent) => {
@@ -162,18 +163,8 @@ const Option = <TValue,>({
       entries.forEach(entry => {
         const isHTMLElement = entry.target instanceof HTMLElement;
         if (isHTMLElement) {
-          // todo: refactor
-          const rect = entry.target.getBoundingClientRect();
-          if (rect.bottom > window.innerHeight) {
-            entry.target.style.top = 'auto';
-            entry.target.style.bottom = '0';
-          } else if (rect.left < 0) {
-            entry.target.style.right = 'auto';
-            entry.target.style.left = '100%';
-          } else if (rect.right > window.innerWidth) {
-            entry.target.style.left = 'auto';
-            entry.target.style.right = '100%';
-          }
+          setSubmenuOpen(entry.target.offsetWidth > 0);
+          setMenuPositionClassName(getMenuPositionClassName(entry.target));
         }
       });
     });
@@ -203,7 +194,9 @@ const Option = <TValue,>({
     >
       {hasSubmenu && (
         <ul
-          className="rnd__menu rnd__submenu"
+          className={clsx(`rnd__menu rnd__submenu ${menuPositionClassName}`, {
+            'rnd__submenu--opened': submenuIsOpen,
+          })}
           ref={submenuRef}
           style={{ width: itemsContainerWidth }}
         >

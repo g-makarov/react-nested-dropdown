@@ -10,8 +10,29 @@
 .rnd__root-menu {
   position: absolute;
   top: 100%;
+  right: 0;
   margin: 7px 0;
   z-index: 10;
+}
+
+.rnd__root-menu.rnd__menu--top {
+  top: auto;
+  bottom: 100%;
+}
+
+.rnd__root-menu.rnd__menu--bottom {
+  top: 100%;
+  bottom: auto;
+}
+
+.rnd__root-menu.rnd__menu--right {
+  left: 0;
+  right: auto;
+}
+
+.rnd__root-menu.rnd__menu--left {
+  right: 0;
+  left: auto;
 }
 
 .rnd__menu {
@@ -25,9 +46,34 @@
 
 .rnd__submenu {
   position: absolute;
-  left: 100%;
   display: none;
+  opacity: 0;
+  left: 100%;
   top: 0;
+}
+
+.rnd__submenu--opened {
+  opacity: 1;
+}
+
+.rnd__submenu.rnd__menu--top {
+  top: auto;
+  bottom: 0;
+}
+
+.rnd__submenu.rnd__menu--bottom {
+  top: 0;
+  bottom: auto;
+}
+
+.rnd__submenu.rnd__menu--right {
+  left: 100%;
+  right: auto;
+}
+
+.rnd__submenu.rnd__menu--left {
+  right: 100%;
+  left: auto;
 }
 
 .rnd__option {
