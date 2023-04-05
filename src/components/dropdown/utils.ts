@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 export function getMenuPositionClassName(element: HTMLElement) {
   const rect = element.getBoundingClientRect();
-  const isBottomOverflow = rect.bottom > window.innerHeight;
+  const isBottomOverflow = rect.bottom > window.innerHeight && rect.top > rect.height;
   const isLeftOverflow = rect.left < 0;
   const isRightOverflow = rect.right > window.innerWidth;
   const isTopOverflow = rect.top < 0;
